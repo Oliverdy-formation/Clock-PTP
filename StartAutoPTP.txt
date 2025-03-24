@@ -1,0 +1,39 @@
+Pour lancer le PTP dès qu'on allume un ordi
+
+Cree un fichier:
+
+sudo nano /etc/systemd/system/ptp4l.service
+
+
+[Unit]
+Description=Run ptp4l at startup
+After=network.target
+
+[Service]
+ExecStart=/usr/sbin/ptp4l -f /etc/linuxptp/ptp4l.conf -i enp3s0 -m
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+-> Puis Fermer et save le fichier
+
+
+Pour le START ET le ENABLE
+
+sudo systemctl daemon-reload
+sudo systemctl enable ptp4l.service
+sudo systemctl start ptp4l.service
+sudo systemctl status ptp4l.service
+
+
+Pour le STOP et le DISABLE
+
+sudo systemctl stop ptp4l.service
+sudo systemctl disable ptp4l.service
+sudo systemctl status ptp4l.service
+
+
+Pour voir le processus
+
+ps aux | grep ptp4l
