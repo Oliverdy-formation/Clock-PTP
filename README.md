@@ -13,7 +13,7 @@ Pour installer installer ethtool faites la commande suivante :
 sudo apt install ethtool
 pour vérifier la compatibilité faites la commande suivante sudo ethtool -T <interface a tester>
 
-##Modifier le fichier ptp4l.conf
+## Modifier le fichier ptp4l.conf
 Fichier de config a modifier : sudo nano /etc/linuxptp/ptp4l.conf
 Mettre le même “clock domain” sur les appareils et le fichier ptp4l.conf
 Mettre la clock GM avec la priority 1. La plus basse des prio c’est 0 ou 1
