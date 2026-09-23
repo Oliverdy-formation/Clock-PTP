@@ -1,10 +1,10 @@
-# Clock-PTP
-Une horloge PTP sans GPS pour ton PC Linux, ton M4250 et ton KAIROS, à tester sur ton matériel.
-
-1. Il faut LinuxPTP **4.4 minimum** et une carte réseau avec horodatage matériel PTP.
-2. Branche le PC et l’interface PTP du KAIROS sur le même VLAN, sans autre horloge maître.
-3. [Installe les fichiers sur le PC Linux](docs/INSTALLATION.md#installation-sur-le-mini-pc).
-4. Dans `/etc/default/clock-ptp`, remplace `CHANGE_ME` par ton interface réseau, visible avec `ip -br link`.
-5. Dans KAIROS, sélectionne la bonne interface PTP et le **domaine 127**.
-6. Lance `sudo systemctl daemon-reload`, puis `sudo systemctl start clock-ptp` ; vérifie que KAIROS suit l’horloge du PC.
-7. Si tout fonctionne : `sudo systemctl enable clock-ptp`. Sinon : `sudo journalctl -u clock-ptp -b`.
+```bash
+sudo apt install linuxptp ethtool iproute2 procps python3 && ptp4l -v # LinuxPTP 4.4 minimum
+sudo install -Dm644 fichier_config.txt /etc/clock-ptp/ptp4l.conf # KAIROS : domaine 127, un seul maître
+sudo install -Dm644 scripts/clock_ptp.py /usr/local/lib/clock-ptp/clock_ptp.py # Lanceur
+sudo install -m644 systemd/clock-ptp.example /etc/default/clock-ptp && ip -br link && sudo nano /etc/default/clock-ptp # Remplacer CHANGE_ME par l'interface
+sudo install -m644 systemd/clock-ptp.service /etc/systemd/system/clock-ptp.service # Service
+sudo systemctl daemon-reload && sudo systemctl start clock-ptp # Démarrer
+sudo journalctl -u clock-ptp -b # Voir les erreurs
+sudo systemctl enable clock-ptp # Démarrage automatique après validation sur KAIROS
+```
