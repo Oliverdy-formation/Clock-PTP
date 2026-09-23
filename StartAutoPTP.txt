@@ -1,8 +1,8 @@
-Le demarrage automatique est maintenant documente dans README.md.
+Le demarrage automatique est maintenant documente dans docs/INSTALLATION.md.
 
 Utiliser systemd/clock-ptp.service et systemd/clock-ptp.example.
 Le service se nomme clock-ptp, et non ptp4l.
 
 Ne pas reutiliser l'ancien ExecStart directement : il contournait
 l'initialisation de la PHC et les precontroles du nouveau lanceur.
-La marche a suivre complete et le retour arriere sont dans README.md.
+La marche a suivre complete et le retour arriere sont dans docs/INSTALLATION.md.
