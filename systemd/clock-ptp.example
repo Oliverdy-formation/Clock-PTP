@@ -1,0 +1,3 @@
+# Remplacer par le nom reel donne par ip -br link.
+PTP_INTERFACE=CHANGE_ME
+PTP_CONFIG=/etc/clock-ptp/ptp4l.conf

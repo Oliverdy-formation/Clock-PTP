@@ -1,0 +1,25 @@
+[Unit]
+Description=Clock-PTP autonomous laboratory grandmaster
+Documentation=https://www.linuxptp.org/documentation/ptp4l/
+Wants=network-online.target
+After=network-online.target
+# Reessayer aussi si le cable est branche longtemps apres le demarrage.
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/default/clock-ptp
+ExecStart=/usr/bin/python3 /usr/local/lib/clock-ptp/clock_ptp.py run --interface ${PTP_INTERFACE} --config ${PTP_CONFIG}
+Restart=on-failure
+RestartSec=10
+RuntimeDirectory=clock-ptp
+RuntimeDirectoryMode=0750
+# Garder l'etat PHC entre stop/start ; /run est efface au reboot.
+RuntimeDirectoryPreserve=yes
+UMask=0027
+TimeoutStopSec=15
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
